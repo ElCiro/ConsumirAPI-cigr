@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { digimonescigrservices } from './digimones-cigr/digimonescigr.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'digimon-cigr';
+  digimones: any;
+
+  constructor(public digimon:digimonescigrservices)
+  {}
+
+  ngOnInit()
+  {
+    this.digimon.getDigimones().subscribe
+    (
+      (r) => {this.digimones =r; console.log(r)},
+      (e) => {console.error(e)}
+    )
+  }
 }
